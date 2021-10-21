@@ -4,8 +4,6 @@ import { ChangeDetectionPageComponent } from './change-detection-page/change-det
 import { ChangeDetectionRoutingModule } from './change-detection-routing.module';
 import { PostCardModule } from 'src/app/shared/components/posts-card/post-card.module';
 
-
-
 @NgModule({
   declarations: [
     ChangeDetectionPageComponent

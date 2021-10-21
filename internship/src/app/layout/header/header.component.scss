@@ -1,0 +1,9 @@
+.header {
+    &__list-container {
+        display: flex;
+        flex-direction: row;
+    }
+    &__menu-item {
+        margin-right: 24px;
+    }
+}
