@@ -1,0 +1,9 @@
+.postsContainer {
+    display: flex;
+    flex-wrap: wrap;
+    max-width: 992px;
+    margin: 0 auto;
+    &__card {
+        flex: 0 1 33.3333%
+    }
+}

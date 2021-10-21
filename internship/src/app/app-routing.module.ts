@@ -3,7 +3,7 @@ import { RouterModule, Routes } from '@angular/router';
 
 const routes: Routes = [
   {
-    path:'/changeDetection',
+    path:'changeDetection',
     loadChildren: () => import('./modules/change-detection/change-detection.module').then(m => m.ChangeDetectionModule)
   }
 ];

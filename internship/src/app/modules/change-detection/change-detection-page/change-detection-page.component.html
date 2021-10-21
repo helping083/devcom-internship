@@ -1,1 +1,3 @@
-<p>change-detection-page works!</p>
+<div class="postsContainer">
+    <app-posts-card [card]="post" *ngFor="let post of posts$ | async" class="postsContainer__card"></app-posts-card>
+</div>
