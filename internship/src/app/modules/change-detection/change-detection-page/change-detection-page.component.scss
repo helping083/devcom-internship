@@ -4,6 +4,7 @@
     max-width: 992px;
     margin: 0 auto;
     &__card {
-        flex: 0 1 33.3333%
+        display: flex;
+        flex: 0 1 33.3333%;
     }
 }
