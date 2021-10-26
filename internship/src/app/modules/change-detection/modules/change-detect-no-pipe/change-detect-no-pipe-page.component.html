@@ -1,1 +1,3 @@
-<app-commets-card *ngFor="let comment of comments"></app-commets-card>
+<div class="commentsContainer">
+    <app-commets-card *ngFor="let comment of comments" [comment]="comment"></app-commets-card>
+</div>
