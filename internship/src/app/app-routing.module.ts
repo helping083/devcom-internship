@@ -3,6 +3,10 @@ import { RouterModule, Routes } from '@angular/router';
 
 const routes: Routes = [
   {
+    path: 'directives',
+    loadChildren: () => import('./modules/directives/directives.module').then(m => m.DirectivesModule)
+  },
+  {
     path:'changeDetection',
     loadChildren: () => import('./modules/change-detection/change-detection.module').then(m => m.ChangeDetectionModule)
   },
