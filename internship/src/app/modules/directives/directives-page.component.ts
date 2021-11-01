@@ -1,4 +1,8 @@
-import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
+import { Component, OnInit, ChangeDetectionStrategy, OnDestroy } from '@angular/core';
+import { Observable } from 'rxjs';
+import { delay } from 'rxjs/operators';
+import { IUser } from 'src/app/core/data/models';
+import { DirectivesService } from 'src/app/core/data/services/directives.service';
 
 @Component({
   selector: 'app-directives-page',
@@ -7,10 +11,14 @@ import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class DirectivesPageComponent implements OnInit {
+  public users$: Observable<IUser[]> = this._getUsersData();
 
-  constructor() { }
+  constructor(private readonly _directivesService: DirectivesService) { }
 
   ngOnInit(): void {
   }
 
+  private _getUsersData(): Observable<IUser[]> {
+    return this._directivesService.getUsers().pipe(delay(1000));
+  }
 }

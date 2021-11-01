@@ -1,4 +1,4 @@
-import { Directive, Input, OnInit, TemplateRef, ViewContainerRef } from '@angular/core';
+import { ChangeDetectorRef, ComponentFactoryResolver, ComponentRef, Directive, ElementRef, Input, OnInit, TemplateRef, ViewContainerRef } from '@angular/core';
 
 @Directive({
   selector: '[appUnless]'
@@ -6,12 +6,15 @@ import { Directive, Input, OnInit, TemplateRef, ViewContainerRef } from '@angula
 export class UnlessDirective implements OnInit{
 
   constructor(
-    private templateRef: TemplateRef<any>,
-    private viewContainer: ViewContainerRef) { }
+    private _host: ElementRef,
+    private readonly _templateRef: TemplateRef<any>,
+    private readonly _viewContainer: ViewContainerRef,
+    private readonly _resolver: ComponentFactoryResolver,
+    private readonly _cdr: ChangeDetectorRef
+  ) { }
   
   ngOnInit() {
-    console.log('template ref', this.templateRef.elementRef.nativeElement);
-    console.log('view container', this.viewContainer);
-    //this.viewContainer.createEmbeddedView(this.templateRef)
+    console.log(this._templateRef)
+    let a = this._viewContainer.createEmbeddedView(this._templateRef)
   }
 }

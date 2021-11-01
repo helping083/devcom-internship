@@ -1,0 +1,15 @@
+.container {
+    display: flex;
+    justify-content: space-around;
+    max-width: 992px;
+    margin: 0 auto;
+    margin-top: 60px;
+    margin-bottom: 60px;
+    border: 1px solid black;
+    padding: 20px;
+    &_center {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+}

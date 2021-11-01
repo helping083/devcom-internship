@@ -1,0 +1,7 @@
+<div>
+    <h3 *ngIf="title">{{title}}</h3>
+    <h2 *ngIf="description">select {{description}}</h2>
+    <select>
+        <ng-container [ngTemplateOutlet]="selectsRef"></ng-container>
+    </select>
+</div>
