@@ -1,3 +1,8 @@
+<div *ngIf="isModalOpen" class="commentsDetail">
+    <app-separate-comment [comment]="commentDetail" (handleCloseEvent)="handleCloseModal()"></app-separate-comment>
+    <input type="text" placeholder="change name" (input)="handleChange($event)" />
+</div>
+
 <div class="commentsContainer">
-    <app-commets-card *ngFor="let comment of comments" [comment]="comment"></app-commets-card>
+    <app-commets-card *ngFor="let comment of comments" [comment]="comment" (click)="handleOpenModal(comment)"></app-commets-card>
 </div>
