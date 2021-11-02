@@ -1,0 +1,14 @@
+<h2>Add a new post</h2>
+<form #newPost="ngForm" novalidate (ngSubmit)="onSubmit(newPost)" class="form">
+    <div class="form__group">
+        <label>title</label>
+        <input class="form__control" type="text" name="title" ngModel placeholder="post title" />
+    </div>
+    <div class="form__group">
+        <label>body</label>
+        <input class="form__control" type="text" name="body" ngModel placeholder="post body" />
+    </div>
+    <div class="form__submit-btn">
+        <button type="submit">{{"add new post" | uppercase}}</button>
+    </div>
+</form>
