@@ -8,6 +8,7 @@ import { DirectivesService } from 'src/app/core/data/services/directives.service
 import { SelectNgContentComponent } from './shared/components/select-ng-content/select-ng-content.component';
 import { SelectContentChildComponent } from './shared/components/select-content-child/select-content-child.component';
 import { PortalModule } from '@angular/cdk/portal';
+import { SelectContentChildrenComponent } from './shared/components/select-content-children/select-content-children.component';
 
 
 @NgModule({
@@ -16,7 +17,8 @@ import { PortalModule } from '@angular/cdk/portal';
     UnlessDirective,
     SelectTemplateRefComponent,
     SelectNgContentComponent,
-    SelectContentChildComponent
+    SelectContentChildComponent,
+    SelectContentChildrenComponent
   ],
   imports: [
     DirectivesRoutingModule,

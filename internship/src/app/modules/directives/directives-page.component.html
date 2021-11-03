@@ -60,6 +60,18 @@
     </ng-template>
 </div>
 
+<!-- content-children -->
+<div class="container">
+    <div class="row">
+        <app-select-content-children [description]="'select a food'" [title]="'using content childre directive'">
+            <ng-template #food>
+                <option>pizza</option>
+                <option>meat</option>
+                <option>milk</option>
+            </ng-template>
+        </app-select-content-children>
+    </div>
+</div>
 <ng-template #loader>
     <div class="spinner">spinner...</div>
 </ng-template>
