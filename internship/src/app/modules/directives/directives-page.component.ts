@@ -1,6 +1,6 @@
-import { Component, OnInit, ChangeDetectionStrategy, OnDestroy } from '@angular/core';
-import { Observable } from 'rxjs';
-import { delay } from 'rxjs/operators';
+import { Component, OnInit, ChangeDetectionStrategy, OnDestroy, ChangeDetectorRef } from '@angular/core';
+import { BehaviorSubject, Observable, ReplaySubject } from 'rxjs';
+import { delay, take, takeUntil } from 'rxjs/operators';
 import { IUser } from 'src/app/core/data/models';
 import { DirectivesService } from 'src/app/core/data/services/directives.service';
 
@@ -10,15 +10,32 @@ import { DirectivesService } from 'src/app/core/data/services/directives.service
   styleUrls: ['./directives-page.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class DirectivesPageComponent implements OnInit {
-  public users$: Observable<IUser[]> = this._getUsersData();
+export class DirectivesPageComponent implements OnInit, OnDestroy {
+  public isLoading$: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(true)
+  public readonly usersData$: BehaviorSubject<IUser[]> = new BehaviorSubject<IUser[]>([]);
+  public _usersData!: Array<IUser>;
 
-  constructor(private readonly _directivesService: DirectivesService) { }
+  private readonly _destroy$ = new ReplaySubject<void>(1);
+  
+  constructor(private readonly _directivesService: DirectivesService, private readonly cdr: ChangeDetectorRef) { }
 
   ngOnInit(): void {
+    this
+      ._directivesService
+      .getUsers()
+      .pipe(
+        takeUntil(this._destroy$)
+      )
+      .subscribe((data: IUser[]) => {
+        this._usersData = data;
+        this.usersData$.next([...data]);
+        this.isLoading$.next(false)
+        this.cdr.detectChanges()
+      });
   }
 
-  private _getUsersData(): Observable<IUser[]> {
-    return this._directivesService.getUsers().pipe(delay(1000));
+  ngOnDestroy() {
+    this._destroy$.next();
+    this._destroy$.complete();
   }
 }

@@ -1,16 +1,33 @@
+<div class="container">
+  <div class="container__row container_center">
+    <app-select-async 
+      [loading]="(isLoading$ | async)!" 
+      [title]="'using ng-template-outlet and async data'" 
+      [description]="'a user'" 
+      [data]="(usersData$ | async)!" 
+      [selectsRef]="users"
+    >
+    </app-select-async>
+  </div>
+
+  <ng-template #users let-item>
+    {{item?.name}}
+  </ng-template>
+</div>
+
 <!--"pure" ng-template outlet -->
 <div class="container">
-    <div class="container__row">
-        <app-select-template-ref [title]="'using ng-template-outlet'" [description]="'an animal'" [selectsRef]="animals"></app-select-template-ref>
+  <div class="container__row">
+    <app-select-template-ref [title]="'using ng-template-outlet'" [description]="'an animal'" [selectsRef]="animals"></app-select-template-ref>
 
-        <ng-template #animals>
-            <option>lion</option>
-            <option>elephant</option>
-            <option>dog</option>
-        </ng-template>
-    </div>
+    <ng-template #animals>
+      <option>lion</option>
+      <option>elephant</option>
+      <option>dog</option>
+    </ng-template>
+  </div>
 
-    <div class="container__row container_center">
+  <!-- <div class="container__row container_center">
         <ng-container *ngIf="users$ | async as users; else loader">
             <app-select-template-ref [description]="'a user'" [title]="'using ng-template-outlet with api data'" [selectsRef]="people"></app-select-template-ref>
 
@@ -18,60 +35,60 @@
                 <option *ngFor="let user of users">{{user.name}}</option>
             </ng-template>
         </ng-container>
-    </div>
+    </div> -->
 </div>
 
 <!-- ng-content + ngTemplateOutlet-->
 <div class="container">
-    <div class="row">
-        <app-select-ng-content [title]="'using ng-content'" [description]="'a country'">
-            <ng-container [ngTemplateOutlet]="countries"></ng-container>
-        </app-select-ng-content>
+  <div class="container__row">
+    <app-select-ng-content [title]="'using ng-content'" [description]="'a country'">
+      <ng-container [ngTemplateOutlet]="countries"></ng-container>
+    </app-select-ng-content>
 
-        <ng-template #countries>
-            <option>Germany</option>
-            <option>GB</option>
-            <option>Poland</option>
-        </ng-template>
-    </div>
+    <ng-template #countries>
+      <option>Germany</option>
+      <option>GB</option>
+      <option>Poland</option>
+    </ng-template>
+  </div>
 </div>
 
 <!-- content child -->
 <div class="container">
-    <div class="row">
-        <app-select-content-child [description]="'a car'" [title]="'using ng-content + content children directive'">
-            <ng-container ford [ngTemplateOutlet]="ford"></ng-container>
-            <ng-container audi [ngTemplateOutlet]="audi"></ng-container>
-        </app-select-content-child>
-    </div>
+  <div class="container__row">
+    <app-select-content-child [description]="'a car'" [title]="'using ng-content + content children directive'">
+      <ng-container ford [ngTemplateOutlet]="ford"></ng-container>
+      <ng-container audi [ngTemplateOutlet]="audi"></ng-container>
+    </app-select-content-child>
+  </div>
 
-    <ng-template #ford>
-        <option>focus</option>
-        <option>mustang</option>
-        <option>kuga</option>
-        <option>sierra</option>
-    </ng-template>
+  <ng-template #ford>
+    <option>focus</option>
+    <option>mustang</option>
+    <option>kuga</option>
+    <option>sierra</option>
+  </ng-template>
 
-    <ng-template #audi>
-        <option>q8</option>
-        <option>q7</option>
-        <option>a6</option>
-        <option>a5</option>
-    </ng-template>
+  <ng-template #audi>
+    <option>q8</option>
+    <option>q7</option>
+    <option>a6</option>
+    <option>a5</option>
+  </ng-template>
 </div>
 
 <!-- content-children -->
 <div class="container">
-    <div class="row">
-        <app-select-content-children [description]="'select a food'" [title]="'using content childre directive'">
-            <ng-template #food>
-                <option>pizza</option>
-                <option>meat</option>
-                <option>milk</option>
-            </ng-template>
-        </app-select-content-children>
-    </div>
+  <div class="container__row">
+    <app-select-content-children [description]="'select a food'" [title]="'using content childre directive'">
+      <ng-template #food>
+        <option>pizza</option>
+        <option>meat</option>
+        <option>milk</option>
+      </ng-template>
+    </app-select-content-children>
+  </div>
 </div>
 <ng-template #loader>
-    <div class="spinner">spinner...</div>
+  <div class="spinner">spinner...</div>
 </ng-template>

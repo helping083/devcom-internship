@@ -9,6 +9,7 @@ import { SelectNgContentComponent } from './shared/components/select-ng-content/
 import { SelectContentChildComponent } from './shared/components/select-content-child/select-content-child.component';
 import { PortalModule } from '@angular/cdk/portal';
 import { SelectContentChildrenComponent } from './shared/components/select-content-children/select-content-children.component';
+import { SelectAsyncComponent } from './shared/components/select-async/select-async.component';
 
 
 @NgModule({
@@ -18,7 +19,8 @@ import { SelectContentChildrenComponent } from './shared/components/select-conte
     SelectTemplateRefComponent,
     SelectNgContentComponent,
     SelectContentChildComponent,
-    SelectContentChildrenComponent
+    SelectContentChildrenComponent,
+    SelectAsyncComponent
   ],
   imports: [
     DirectivesRoutingModule,

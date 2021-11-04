@@ -1,0 +1,15 @@
+<div *ngIf="data?.length && !loading">
+  <h3 *ngIf="title">{{title}}</h3>
+  <h2 *ngIf="description">select {{description}}</h2>
+  <select>
+    <ng-container *ngFor="let item of data; let i = index">
+      <option>
+        <ng-container [ngTemplateOutlet]="selectsRef" [ngTemplateOutletContext]="{ $implicit: item, i: i }"></ng-container>
+      </option>
+    </ng-container>
+  </select>
+</div>
+
+<ng-container *ngIf="loading">
+  <div class="loading">Loading...</div>
+</ng-container>
