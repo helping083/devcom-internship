@@ -4,3 +4,14 @@
     max-width: 992px;
     margin: 0 auto;
 }
+
+.commentsDetail,
+.message {
+    background: #D3D3D3;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    width: 100%;
+    padding: 20px;
+}

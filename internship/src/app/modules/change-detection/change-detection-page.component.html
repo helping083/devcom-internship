@@ -1,3 +1,8 @@
 <div class="postsContainer">
-    <app-posts-card [card]="post" *ngFor="let post of posts$ | async" class="postsContainer__card"></app-posts-card>
+    <div class="postsContainer__form-container">
+        <app-add-post-form [postsAmount]="posts.length" (addPost)="handleNewPostAddition($event)"></app-add-post-form>
+    </div>
+    <div class="postsContainer__row">
+        <app-posts-card [card]="post" *ngFor="let post of posts" class="postsContainer__card"></app-posts-card>
+    </div>
 </div>
