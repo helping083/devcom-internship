@@ -1,0 +1,8 @@
+<div class="ng-content">
+    <h3 *ngIf="title">{{title}}</h3>
+    <h2 *ngIf="description">select {{description}}</h2>
+    <select class="card">
+        <ng-content select="[ford]"></ng-content>
+        <ng-content select="[audi]"></ng-content>
+    </select>
+</div>
