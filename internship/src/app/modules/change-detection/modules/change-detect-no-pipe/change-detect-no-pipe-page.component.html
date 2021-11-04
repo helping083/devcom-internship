@@ -4,5 +4,5 @@
 </div>
 
 <div class="commentsContainer">
-    <app-commets-card *ngFor="let comment of comments" [comment]="comment" (click)="handleOpenModal(comment)"></app-commets-card>
+    <app-commets-card *ngFor="let comment of comments$ | async" [comment]="comment" (click)="handleOpenModal(comment)"></app-commets-card>
 </div>
