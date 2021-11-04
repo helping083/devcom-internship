@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 import { AttributiveStructuralComponent } from './attributive-structural.component';
 import { ExpandableDirective } from './shared/directives/expandable.directive';
 import { IfelseDirective } from './shared/directives/ifelse.directive';
+import { AttributiveStructuralRoutingModule } from './attributive-structural-routing.module';
 
 
 
@@ -13,7 +14,8 @@ import { IfelseDirective } from './shared/directives/ifelse.directive';
     IfelseDirective
   ],
   imports: [
-    CommonModule
+    CommonModule,
+    AttributiveStructuralRoutingModule
   ]
 })
 export class AttributiveStructuralModule { }

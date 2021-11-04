@@ -3,6 +3,10 @@ import { RouterModule, Routes } from '@angular/router';
 
 const routes: Routes = [
   {
+    path:'attr-struc',
+    loadChildren: () => import('./modules/attributive-structural/attributive-structural.module').then(m => m.AttributiveStructuralModule)
+  },
+  {
     path: 'directives',
     loadChildren: () => import('./modules/directives/directives.module').then(m => m.DirectivesModule)
   },
