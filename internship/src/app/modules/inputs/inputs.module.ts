@@ -3,7 +3,7 @@ import { CommonModule } from '@angular/common';
 import { InputsPageComponent } from './inputs-page.component';
 import { InputsRoutingModule } from './inputs-routing.module';
 import { RatingComponent } from './shared/components/rating/rating.component';
-
+import { ReactiveFormsModule } from '@angular/forms';
 
 
 @NgModule({
@@ -13,7 +13,8 @@ import { RatingComponent } from './shared/components/rating/rating.component';
   ],
   imports: [
     CommonModule,
-    InputsRoutingModule
+    InputsRoutingModule,
+    ReactiveFormsModule
   ]
 })
 export class InputsModule { }
