@@ -3,6 +3,10 @@ import { RouterModule, Routes } from '@angular/router';
 
 const routes: Routes = [
   {
+    path: 'custonmInputs',
+    loadChildren: () => import('./modules/inputs/inputs.module').then(m => m.InputsModule)
+  },
+  {
     path: 'directives',
     loadChildren: () => import('./modules/directives/directives.module').then(m => m.DirectivesModule)
   },
