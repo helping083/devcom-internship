@@ -4,6 +4,9 @@ import { AttributiveStructuralComponent } from './attributive-structural.compone
 import { ExpandableDirective } from './shared/directives/expandable.directive';
 import { IfelseDirective } from './shared/directives/ifelse.directive';
 import { AttributiveStructuralRoutingModule } from './attributive-structural-routing.module';
+import { DirectivesService } from 'src/app/core/data/services/directives.service';
+import { PostCardModule } from 'src/app/shared/components/posts-card/post-card.module';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 
 
@@ -15,7 +18,11 @@ import { AttributiveStructuralRoutingModule } from './attributive-structural-rou
   ],
   imports: [
     CommonModule,
-    AttributiveStructuralRoutingModule
-  ]
+    PostCardModule,
+    AttributiveStructuralRoutingModule,
+    FormsModule, 
+    ReactiveFormsModule
+  ],
+  providers: [DirectivesService]
 })
 export class AttributiveStructuralModule { }

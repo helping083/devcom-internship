@@ -1,3 +1,21 @@
 <div class="container">
-    <input appExpandable [expectedClassList] = "['expandable']" type="text" placeholder="enter a name" class="container__control-name"/>
+  <input 
+    appExpandable
+    *appIfElse="!(isDataLoading$ | async)!; else loader; name 'input'"
+    [expectedClassList]="['expandable']"
+    [formControl]="filterControl"
+    type="text" 
+    placeholder="enter a title"
+    class="container__control-name"  
+  />
 </div>
+
+<div class="container" *appIfElse="!(isDataLoading$ | async)!; else loader; name 'posts'">
+  <div class="container__row">
+    <app-posts-card [card]="post" *ngFor="let post of posts" class="container__card"></app-posts-card>
+  </div>
+</div>
+
+<ng-template #loader let-name = name>
+  <div class="loader">loading {{name}}...</div>
+</ng-template>
