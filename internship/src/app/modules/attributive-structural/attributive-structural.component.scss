@@ -1,0 +1,14 @@
+.container {
+    display: flex;
+    justify-content: center;
+    padding-top: 26px;
+    &__control-name {
+        padding: 8px;
+        border: 2px solid burlywood;
+        transition: width 1s;
+        width: 200px;
+    }
+    .expandable {
+        width: 330px;
+    }
+}
