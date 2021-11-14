@@ -1,0 +1,12 @@
+:host {
+    text-align: center;
+}
+.rating {cursor: pointer;
+    font-size: var(--size);
+    color: var(--colorUnchecked);
+    
+    display: inline-block;
+}
+.checked {
+    color: var(--colorSelected);
+}

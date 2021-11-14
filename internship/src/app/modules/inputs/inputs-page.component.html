@@ -1,1 +1,8 @@
-<app-rating></app-rating>
+<div class="custom-form">
+  <form [formGroup]="form"  class="custom-form__form">
+    <app-custom-counter formControlName="size" class="custom-form__counter"></app-custom-counter>
+    <app-rating [starsAmount]="5" [size]="form.value.size" formControlName="rating"></app-rating>
+  </form>
+  <p>{{form.value | json}}</p>
+</div>
+
