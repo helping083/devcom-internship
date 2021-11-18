@@ -1,0 +1,7 @@
+<div class="custom-file-loader">
+  <div class="custom-file-loader__label">{{label}}</div>
+  <label [for]="filesId">
+    <ng-content></ng-content>
+  </label>
+  <input [id]="filesId" type="file" hidden (change)="onFileUpload($event)"/>
+</div>

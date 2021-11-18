@@ -13,10 +13,41 @@
     width: 320px;
     margin-top: 60px;
     padding: 20px;
+    &-file {
+      display: flex;
+      width: 100%;
+      justify-content: space-between;
+      border: 1px solid;
+      cursor: pointer;
+    }
+    &-file-input {
+      width: calc(100% - 70px);
+      background-color: #f4f4f4;
+      padding: 8px;
+      text-align: left;
+      text-overflow: ellipsis;
+      overflow: hidden;
+      white-space: nowrap;
+    }
+    &-file-button {
+      width: 70px;
+      padding: 5px 15px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      background-color: #2DA44E;
+      color: white;
+      text-transform: uppercase;
+      font-family: "Segoe UI",Helvetica,Arial,sans-serif,"Apple Color Emoji","Segoe UI Emoji";
+    }
   }
   &__counter {
     width: 150px;
     display: block;
     margin: 0 auto;
+  }
+  &__form-file-button {
+    font-weight: 400;
+    font-size: 14px;
   }
 }

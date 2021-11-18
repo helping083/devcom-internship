@@ -1,5 +1,6 @@
 import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
-import { FormBuilder, FormControl, FormGroup } from '@angular/forms';
+import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import { fileValidate } from './shared/validators/fileValidator';
 
 @Component({
   selector: 'app-inputs-page',
@@ -18,7 +19,8 @@ export class InputsPageComponent implements OnInit {
 
   private _createForm(): void {
     this._myForm = this._fb.group({
-      size: [32],
+      files: [null, [Validators.required, fileValidate(['pdf'])]],
+      size: [32, [Validators.min(16), Validators.max(64)]],
       rating: [3]
     });
   };

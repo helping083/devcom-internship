@@ -1,8 +1,15 @@
 <div class="custom-form">
   <form [formGroup]="form"  class="custom-form__form">
+    <app-custom-files-loader formControlName="files" [label]="'upload a photo'" [formControlName]="'files'" class="custom-form__form-file-uploader">
+      <div class="custom-form__form-file">
+        <div class="custom-form__form-file-input">{{form.value.files?.name}}</div>
+        <div class="custom-form__form-file-button">upload</div>
+      </div>
+    </app-custom-files-loader>
     <app-custom-counter formControlName="size" class="custom-form__counter"></app-custom-counter>
     <app-rating [starsAmount]="5" [size]="form.value.size" formControlName="rating"></app-rating>
   </form>
   <p>{{form.value | json}}</p>
+  <p> test</p>
 </div>
 

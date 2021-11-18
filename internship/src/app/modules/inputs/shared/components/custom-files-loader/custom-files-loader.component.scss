@@ -1,0 +1,10 @@
+.custom-file-loader {
+  width: 160px;
+  margin: 0 auto;
+  &__label {
+    color: #2d323d;
+    text-transform: uppercase;
+    font-weight: 600;
+    font-size: 12px;
+  }
+}
