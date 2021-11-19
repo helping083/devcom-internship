@@ -15,6 +15,10 @@ const routes: Routes = [
     loadChildren: () => import('./modules/change-detection/change-detection.module').then(m => m.ChangeDetectionModule)
   },
   {
+    path: 'subjects',
+    loadChildren: () => import('./modules/subjects/subjects.module').then(m => m.SubjectsModule)
+  },
+  {
     path: '',
     loadChildren: () => import('./modules/home/home.module').then(m => m.HomeModule)
   }
