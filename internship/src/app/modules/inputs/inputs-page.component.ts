@@ -1,5 +1,6 @@
 import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import { FormErrorsEnum } from 'src/app/core/data/enums';
 import { fileValidate } from './shared/validators/fileValidator';
 
 @Component({
@@ -9,8 +10,8 @@ import { fileValidate } from './shared/validators/fileValidator';
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class InputsPageComponent implements OnInit {
+  public formErrorsEnum = FormErrorsEnum;
   private _myForm!: FormGroup;
-
   constructor(private readonly _fb: FormBuilder) { }
 
   ngOnInit(): void {
@@ -19,7 +20,7 @@ export class InputsPageComponent implements OnInit {
 
   private _createForm(): void {
     this._myForm = this._fb.group({
-      files: [null, [Validators.required, fileValidate(['pdf'])]],
+      files: [null, [fileValidate(['pdf'])]],
       size: [32, [Validators.min(16), Validators.max(64)]],
       rating: [3]
     });
