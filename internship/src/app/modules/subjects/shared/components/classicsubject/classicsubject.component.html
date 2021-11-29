@@ -1,1 +1,9 @@
-<p>classicsubject works!</p>
+<div *ngIf="githubUsers$ | async as users" class="users">
+  <div *ngFor="let user of users" class="users__container">
+    <app-user [user]="user" class="users__item"></app-user>
+  </div>
+</div>
+
+<ng-template #loading>
+  <div>loading</div>
+</ng-template>

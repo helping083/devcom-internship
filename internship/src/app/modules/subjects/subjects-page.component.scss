@@ -1,0 +1,12 @@
+.subjects {
+  &__classic-subjects-container {
+    display: flex;
+    margin: 0 auto;
+    max-width: 1440px;
+    justify-content: space-between;
+  }
+  &__classic-subjects-container-card {
+    flex: 0 1 50%;
+    margin: 10px;
+  }
+}

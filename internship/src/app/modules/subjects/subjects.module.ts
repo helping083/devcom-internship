@@ -6,12 +6,14 @@ import { SubjectsService } from './shared/services/subjects.service';
 import { AsyncSubjectsService } from './shared/services/async-subjects.service';
 import { ClassicsubjectComponent } from './shared/components/classicsubject/classicsubject.component';
 import { CustomInputComponent } from './shared/components/custom-input/custom-input.component';
+import { UserComponent } from './shared/components/user/user.component';
 
 @NgModule({
   declarations: [
     SubjectsPageComponent,
     CustomInputComponent,
-    ClassicsubjectComponent
+    ClassicsubjectComponent,
+    UserComponent
   ],
   imports: [
     CommonModule,

@@ -1,0 +1,10 @@
+.users {
+  display: flex;
+  flex-wrap: wrap;
+  border: 1px solid red;
+  padding: 20px;
+  &__container {
+    display: flex;
+    flex: 0 1 33.3333%;
+  }
+}
