@@ -7,7 +7,7 @@ import { SubjectsService } from './shared/services/subjects.service';
   selector: 'app-subjects-page',
   templateUrl: './subjects-page.component.html',
   styleUrls: ['./subjects-page.component.scss'],
-  providers: [AsyncSubjectsService],
+  providers: [],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class SubjectsPageComponent implements OnInit {
