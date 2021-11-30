@@ -1,6 +1,9 @@
-<div *ngIf="githubUsers$ | async as users" class="users">
-  <div *ngFor="let user of users" class="users__container">
-    <app-user [user]="user" class="users__item"></app-user>
+<div *ngIf="githubUsers$ | async as users" >
+  <div class="users__title">classic subject component, multicasting</div>
+  <div class="users">
+    <div *ngFor="let user of users" class="users__container">
+      <app-user [user]="user" class="users__item"></app-user>
+    </div>
   </div>
 </div>
 

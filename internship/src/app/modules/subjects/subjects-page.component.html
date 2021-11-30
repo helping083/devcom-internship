@@ -1,13 +1,18 @@
-<p>subjects-page works!</p>
-<app-custom-input></app-custom-input>
-<button type="button" #button>classic</button>
-<button type="button" #async>stop loading</button>
-
-<div class="subjects__classic-subjects-container">
-  <div class="subjects__classic-subjects-container-card">
-    <app-classicsubject></app-classicsubject>
+<div class="subjects-page">
+  <div class="subjects-page__input-container">
+    <app-custom-input></app-custom-input>
   </div>
-  <div class="subjects__classic-subjects-container-card">
-    <app-classicsubject></app-classicsubject>
+  <div class="subjects-page__buttons-container">
+    <button type="button" #button class="subjects-page__button">classic</button>
+    <button type="button" #async>stop loading</button>
+  </div>
+  <div class="subjects__classic-subjects-container">
+    <div class="subjects__classic-subjects-container-card">
+      <app-classicsubject></app-classicsubject>
+    </div>
+    <div class="subjects__classic-subjects-container-card">
+      <app-classicsubject></app-classicsubject>
+    </div>
   </div>
 </div>
+
