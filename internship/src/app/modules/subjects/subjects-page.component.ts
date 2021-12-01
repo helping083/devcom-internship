@@ -1,5 +1,5 @@
 import { ChangeDetectionStrategy, Component, ElementRef, OnDestroy, OnInit, ViewChild } from '@angular/core';
-import { fromEvent, Observable, ReplaySubject } from 'rxjs';
+import { BehaviorSubject, fromEvent, Observable, ReplaySubject } from 'rxjs';
 import { switchMap, takeUntil } from 'rxjs/operators';
 import { GithubUsers } from './shared/models/githubUsers.interface';
 import { AsyncSubjectsService } from './shared/services/async-subjects.service';
@@ -13,9 +13,11 @@ import { SubjectsService } from './shared/services/subjects.service';
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class SubjectsPageComponent implements OnInit, OnDestroy {
+  public loading$: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
   private _destroy$ = new ReplaySubject<void>(1);
   public latestRequests$!: Observable<GithubUsers[]>;
   public counter: number = 0;
+
   @ViewChild('button', { static: true, read: ElementRef }) private readonly button!: ElementRef;
   @ViewChild('async', { static: true, read: ElementRef }) private readonly asyncButton!: ElementRef;
 
@@ -33,7 +35,7 @@ export class SubjectsPageComponent implements OnInit, OnDestroy {
   private _initListeners(): void {
     fromEvent(this.button.nativeElement, 'click')
       .subscribe((_) => {
-        this.subjectService.makeRequest(`https://api.github.com/users?per_page=5`);
+        this.subjectService.makeRequest(`https://api.github.com/users?per_page=${this.counter}`);
       });
 
     fromEvent(this.asyncButton.nativeElement, 'click')

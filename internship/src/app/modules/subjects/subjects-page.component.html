@@ -3,7 +3,9 @@
     <app-custom-input></app-custom-input>
   </div>
   <div class="subjects-page__buttons-container">
-    <button type="button" #button class="subjects-page__button">classic</button>
+    <button type="button" #button class="subjects-page__button">
+      <ng-container *ngTemplateOutlet="(loading$ | async) ? loader: staticText"></ng-container>
+    </button>
     <button type="button" #async>stop loading</button>
   </div>
   <div class="subjects__classic-subjects-container">
@@ -16,3 +18,10 @@
   </div>
 </div>
 
+<ng-template #loader>
+  loader
+</ng-template>
+
+<ng-template #staticText>
+  test
+</ng-template>
