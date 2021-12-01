@@ -1,6 +1,6 @@
 import { ChangeDetectionStrategy, Component, ElementRef, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { BehaviorSubject, fromEvent, Observable, ReplaySubject } from 'rxjs';
-import { switchMap, takeUntil } from 'rxjs/operators';
+import { switchMap, takeUntil, tap } from 'rxjs/operators';
 import { GithubUsers } from './shared/models/githubUsers.interface';
 import { AsyncSubjectsService } from './shared/services/async-subjects.service';
 import { ReplaySubjectService } from './shared/services/replay-subject.service';
@@ -16,6 +16,7 @@ export class SubjectsPageComponent implements OnInit, OnDestroy {
   public loading$: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
   private _destroy$ = new ReplaySubject<void>(1);
   public latestRequests$!: Observable<GithubUsers[]>;
+  private _latest!: Array<GithubUsers[]>;
   public counter: number = 0;
 
   @ViewChild('button', { static: true, read: ElementRef }) private readonly button!: ElementRef;
@@ -35,18 +36,21 @@ export class SubjectsPageComponent implements OnInit, OnDestroy {
   private _initListeners(): void {
     fromEvent(this.button.nativeElement, 'click')
       .subscribe((_) => {
+        this.loading$.next(true);
         this.subjectService.makeRequest(`https://api.github.com/users?per_page=${this.counter}`);
       });
 
     fromEvent(this.asyncButton.nativeElement, 'click')
       .pipe(
         switchMap((_) => {
-          return this._replaySubject.latestRequests.pipe(takeUntil(this._destroy$))
+          return this._replaySubject.latestRequests
         }),
         takeUntil(this._destroy$)
       )
       .subscribe((val) => {
-        console.log(val);
+        
+        this._latest.push(val);
+        console.log(this._latest);
       });
   }
 
@@ -57,11 +61,11 @@ export class SubjectsPageComponent implements OnInit, OnDestroy {
       .subscribe((users: GithubUsers[]) => {
         this.counter += 1;
         this._replaySubject.setLastRequest(users);
+        this.loading$.next(false);
       });
   }
 
   ngOnDestroy() {
-    this._replaySubject._latestRequests.complete()
     this._destroy$.next();
     this._destroy$.complete();
   }
