@@ -1,4 +1,4 @@
-import { Component, Input, OnDestroy, OnInit } from '@angular/core';
+import { ChangeDetectionStrategy, Component, Input, OnDestroy, OnInit } from '@angular/core';
 import { Observable, Subscription } from 'rxjs';
 import { GithubUsers } from '../../models/githubUsers.interface';
 import { SubjectsService } from '../../services/subjects.service';
@@ -6,10 +6,10 @@ import { SubjectsService } from '../../services/subjects.service';
 @Component({
   selector: 'app-classicsubject',
   templateUrl: './classicsubject.component.html',
-  styleUrls: ['./classicsubject.component.scss']
+  styleUrls: ['./classicsubject.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class ClassicsubjectComponent implements OnInit, OnDestroy {
-  @Input() test!: string[];
   public githubUsers$!: Observable<GithubUsers[]>;
 
   constructor(private readonly _subjectsService: SubjectsService) { }
