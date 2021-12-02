@@ -23,6 +23,10 @@ const routes: Routes = [
     loadChildren: () => import('./modules/subjects/subjects.module').then(m => m.SubjectsModule)
   },
   {
+    path: 'observables',
+    loadChildren: () => import('./modules/observables/observables.module').then(m => m.ObservablesModule)
+  },
+  {
     path: '',
     loadChildren: () => import('./modules/home/home.module').then(m => m.HomeModule)
   }
