@@ -7,7 +7,7 @@ import { AsyncSubjectsService } from './shared/services/async-subjects.service';
 import { ClassicsubjectComponent } from './shared/components/classicsubject/classicsubject.component';
 import { CustomInputComponent } from './shared/components/custom-input/custom-input.component';
 import { UserComponent } from './shared/components/user/user.component';
-import { ReplaySubjectService } from './shared/services/replay-subject.service';
+import { ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -18,12 +18,12 @@ import { ReplaySubjectService } from './shared/services/replay-subject.service';
   ],
   imports: [
     CommonModule,
-    SubjectsRoutingModule
+    SubjectsRoutingModule,
+    ReactiveFormsModule
   ],
   providers: [
     SubjectsService,
-    AsyncSubjectsService,
-    ReplaySubjectService
+    AsyncSubjectsService
   ]
 })
 export class SubjectsModule { }

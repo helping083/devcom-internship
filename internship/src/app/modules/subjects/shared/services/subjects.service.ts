@@ -9,8 +9,6 @@ export class SubjectsService {
   private _classicSubject: Subject<string> = new Subject<string>();
   private _githubUsers: Subject<GithubUsers[]> = new Subject<GithubUsers[]>();
 
-  constructor() { }
-
   get githubUsers(): Observable<any> {
     return this._githubUsers.asObservable();
   }
@@ -20,7 +18,7 @@ export class SubjectsService {
       .asObservable()
       .pipe(
         switchMap((url: string): Observable<AjaxResponse> => {
-          return ajax(url).pipe(delay(1000));
+          return ajax(url).pipe(delay(3000));
         }),
         map((userResponse: AjaxResponse): GithubUsers[] => {
           return userResponse.response as Array<GithubUsers>

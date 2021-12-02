@@ -1,13 +1,23 @@
 <div class="subjects-page">
+  <p *ngIf="showLogged$ | async" class="subjects-page__session-start-time">
+    acording to the async subject the page session start time is: {{lastLogged | async | date:'medium'}}
+  </p>
   <div class="subjects-page__input-container">
-    <app-custom-input></app-custom-input>
+    <app-custom-input [formControl]="githubPageInput"></app-custom-input>
   </div>
+
   <div class="subjects-page__buttons-container">
     <button type="button" #button class="subjects-page__button">
-      <ng-container *ngTemplateOutlet="(loading$ | async) ? loader: staticText"></ng-container>
+      <ng-container 
+        *ngTemplateOutlet="
+          (loading$ | async) ? 
+          loader: staticText; 
+          context: { text: 'get github users', load: 'loading', page: counter }"
+      ></ng-container>
     </button>
-    <button type="button" #async>stop loading</button>
+    <button type="button" class="subjects-page__button" (click)="handlePageEnterTime()"> show page enter time </button>
   </div>
+
   <div class="subjects__classic-subjects-container">
     <div class="subjects__classic-subjects-container-card">
       <app-classicsubject></app-classicsubject>
@@ -16,12 +26,13 @@
       <app-classicsubject></app-classicsubject>
     </div>
   </div>
+
 </div>
 
-<ng-template #loader>
-  loader
+<ng-template #loader let-text="load" let-counter="page">
+  {{text}} github page {{counter}}
 </ng-template>
 
-<ng-template #staticText>
-  test
+<ng-template #staticText let-text="text">
+  <span class="subjects-page__button-text">{{text}}</span>
 </ng-template>

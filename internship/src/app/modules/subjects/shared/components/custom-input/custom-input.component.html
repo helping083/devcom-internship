@@ -1,1 +1,3 @@
-<input type="number"/>
+<div>
+  <input type="number" (input)="onInputChange($event)" min="0" [value]="page"/>
+</div>
