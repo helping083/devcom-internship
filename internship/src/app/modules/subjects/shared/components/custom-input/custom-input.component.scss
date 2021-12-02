@@ -1,0 +1,7 @@
+.custom-input {
+  display: flex;
+  flex-direction: column;
+  &__label, &__input {
+    display: block;
+  }
+}

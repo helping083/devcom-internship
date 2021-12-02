@@ -1,3 +1,4 @@
-<div>
-  <input type="number" (input)="onInputChange($event)" min="0" [value]="page"/>
+<div class="custom-input__container">
+  <label class="custom-input__label">{{label}}</label>
+  <input class="custom-input__input" type="number" (input)="onInputChange($event)" min="0" [value]="page"/>
 </div>

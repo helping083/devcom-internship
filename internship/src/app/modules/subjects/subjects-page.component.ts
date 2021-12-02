@@ -1,7 +1,7 @@
 import { ChangeDetectionStrategy, Component, ElementRef, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { FormControl } from '@angular/forms';
-import { AsyncSubject, BehaviorSubject, fromEvent, interval, Observable, ReplaySubject, zip } from 'rxjs';
-import { combineAll, multicast, pairwise, publish, switchMap, take, takeUntil, tap } from 'rxjs/operators';
+import { BehaviorSubject, fromEvent, Observable, ReplaySubject } from 'rxjs';
+import { takeUntil } from 'rxjs/operators';
 import { GithubUsers } from './shared/models/githubUsers.interface';
 import { AsyncSubjectsService } from './shared/services/async-subjects.service';
 import { SubjectsService } from './shared/services/subjects.service';

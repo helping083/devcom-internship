@@ -3,7 +3,7 @@
     acording to the async subject the page session start time is: {{lastLogged | async | date:'medium'}}
   </p>
   <div class="subjects-page__input-container">
-    <app-custom-input [formControl]="githubPageInput"></app-custom-input>
+    <app-custom-input [formControl]="githubPageInput" [label]="'choose a github page'"></app-custom-input>
   </div>
 
   <div class="subjects-page__buttons-container">
