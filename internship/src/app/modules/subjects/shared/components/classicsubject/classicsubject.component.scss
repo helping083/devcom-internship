@@ -1,11 +1,12 @@
 .users {
   display: flex;
   flex-wrap: wrap;
-  border: solid 5px #FC5185;
+  border: solid 3px #FC5185;
   padding: 20px;
   &__title {
-    font-size: 19px;
+    font-size: 16px;
     font-weight: bold;
+    text-align: center;
     text-transform: uppercase;
   }
   &__container {
