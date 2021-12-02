@@ -7,12 +7,20 @@ const routes: Routes = [
     loadChildren: () => import('./modules/attributive-structural/attributive-structural.module').then(m => m.AttributiveStructuralModule)
   },
   {
+    path: 'custonmInputs',
+    loadChildren: () => import('./modules/inputs/inputs.module').then(m => m.InputsModule)
+  },
+  {
     path: 'directives',
     loadChildren: () => import('./modules/directives/directives.module').then(m => m.DirectivesModule)
   },
   {
     path:'changeDetection',
     loadChildren: () => import('./modules/change-detection/change-detection.module').then(m => m.ChangeDetectionModule)
+  },
+  {
+    path: 'subjects',
+    loadChildren: () => import('./modules/subjects/subjects.module').then(m => m.SubjectsModule)
   },
   {
     path: '',

@@ -1,0 +1,16 @@
+.users {
+  display: flex;
+  flex-wrap: wrap;
+  border: solid 5px #FC5185;
+  padding: 20px;
+  &__title {
+    font-size: 19px;
+    font-weight: bold;
+    text-transform: uppercase;
+  }
+  &__container {
+    display: flex;
+    padding: 0 15px;
+    flex: 0 1 33.3333%;
+  }
+}
