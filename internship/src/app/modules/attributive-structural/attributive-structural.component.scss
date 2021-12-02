@@ -1,0 +1,35 @@
+.container {
+  display: flex;
+  flex-wrap: wrap;
+  max-width: 992px;
+  margin: 0 auto;
+  justify-content: center;
+  padding-top: 26px;
+  &__control-name {
+    padding: 8px;
+    border: 2px solid burlywood;
+    transition: width 0.4s ease;
+    width: 200px;
+    position: relative;
+  }
+  &__row {
+    display: flex;
+    flex-wrap: wrap;
+  }
+  &__card {
+    display: flex;
+    flex: 0 1 33.3333%;
+  }
+  &__reset {
+    position: absolute;
+  }
+  .expandable {
+    width: 330px;
+  }
+}
+.loader {
+  margin: 0 auto;
+  margin-bottom: 20px;
+  width: 200px;
+  font-size: 26px;
+}

@@ -3,8 +3,8 @@ import { RouterModule, Routes } from '@angular/router';
 
 const routes: Routes = [
   {
-    path: 'custonmInputs',
-    loadChildren: () => import('./modules/inputs/inputs.module').then(m => m.InputsModule)
+    path:'attr-struc',
+    loadChildren: () => import('./modules/attributive-structural/attributive-structural.module').then(m => m.AttributiveStructuralModule)
   },
   {
     path: 'directives',
