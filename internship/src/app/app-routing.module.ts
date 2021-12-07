@@ -23,6 +23,10 @@ const routes: Routes = [
     loadChildren: () => import('./modules/subjects/subjects.module').then(m => m.SubjectsModule)
   },
   {
+    path: 'rxjs',
+    loadChildren: () => import('./modules/rxjs/rxjs.module').then(m => m.RxjsModule)
+  },
+  {
     path: '',
     loadChildren: () => import('./modules/home/home.module').then(m => m.HomeModule)
   }
