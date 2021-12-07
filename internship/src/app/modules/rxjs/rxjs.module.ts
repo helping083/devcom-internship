@@ -3,16 +3,21 @@ import { CommonModule } from '@angular/common';
 import { RxjsPageComponent } from './rxjs-page.component';
 import { RXJSRoutingModule } from './rxjs-routing.module';
 import { TimerComponent } from './shared/components/timer/timer.component';
+import { ReactiveFormsModule } from '@angular/forms';
+import { SearchComponent } from './shared/components/search/search.component';
 
 
 
 @NgModule({
   declarations: [
     RxjsPageComponent,
-    TimerComponent
+    TimerComponent,
+    SearchComponent,
+
   ],
   imports: [
     CommonModule,
+    ReactiveFormsModule,
     RXJSRoutingModule
   ]
 })
