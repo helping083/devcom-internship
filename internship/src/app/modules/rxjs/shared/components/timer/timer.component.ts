@@ -1,7 +1,6 @@
 import { ChangeDetectionStrategy, ChangeDetectorRef, Component, ElementRef, Input, OnDestroy, OnInit, ViewChild } from '@angular/core';
-import { FormControl } from '@angular/forms';
 import { EMPTY, fromEvent, iif, merge, Observable, ReplaySubject, Subscription, timer } from 'rxjs';
-import { mapTo, repeat, scan, startWith, switchMap, takeUntil, takeWhile } from 'rxjs/operators';
+import { mapTo, repeat, scan, share, startWith, switchMap, takeWhile } from 'rxjs/operators';
 
 @Component({
   selector: 'app-timer',
@@ -29,7 +28,7 @@ export class TimerComponent implements OnInit, OnDestroy {
   constructor(private readonly _cdr: ChangeDetectorRef) { }
 
   ngOnInit(): void {
-    const countdown$: Observable<number> = timer(this.start, 1000);
+    const countdown$: Observable<number> = timer(0, 1000);
     const startButton$: Observable<boolean> = fromEvent(this.buttonStart.nativeElement, 'click').pipe(mapTo(true))
     const pauseButton$: Observable<boolean> = fromEvent(this.buttonPause.nativeElement, 'click').pipe(mapTo(false));
 
@@ -42,18 +41,12 @@ export class TimerComponent implements OnInit, OnDestroy {
         scan((acc: number, curr: number) => acc + curr, this.val),
         startWith(this.val),
         takeWhile((val: number) => val >= 0),
+        share(),
         repeat()
       )
       .subscribe(
         (left: number) => {
           this.val = left;
-          this._cdr.detectChanges()
-        },
-        (err) => {
-          console.error(err);
-        },
-        () => {
-          this.val = this.start;
           this._cdr.detectChanges()
         }
       );
