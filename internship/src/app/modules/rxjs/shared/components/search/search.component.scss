@@ -1,0 +1,15 @@
+.search {
+  &__container {
+    position: relative;
+  }
+}
+input {
+  padding: 10px;
+  border-radius: 20px;
+  font-size: 14px;
+}
+span {
+  position: absolute;
+  bottom: -20px;
+  right: 0px;
+}
