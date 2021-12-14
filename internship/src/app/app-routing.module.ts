@@ -27,6 +27,10 @@ const routes: Routes = [
     loadChildren: () => import('./modules/rxjs/rxjs.module').then(m => m.RxjsModule)
   },
   {
+    path: 'rxjs-operators',
+    loadChildren: () => import('./modules/rxjs-operators/rxjs-operators.module').then(m => m.RxjsOperatorsModule)
+  },
+  {
     path: '',
     loadChildren: () => import('./modules/home/home.module').then(m => m.HomeModule)
   }
