@@ -1,6 +1,6 @@
 import { ChangeDetectionStrategy, ChangeDetectorRef, Component, ElementRef, Input, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { EMPTY, fromEvent, iif, merge, Observable, ReplaySubject,Subscription, timer } from 'rxjs';
-import { mapTo, repeat, scan, startWith, switchMap, takeWhile } from 'rxjs/operators';
+import { finalize, mapTo, repeat, scan, startWith, switchMap, takeWhile } from 'rxjs/operators';
 
 @Component({
   selector: 'app-timer',
@@ -41,9 +41,10 @@ export class TimerComponent implements OnInit, OnDestroy {
         }),
         mapTo(-1),
         scan((acc: number, curr: number) => acc + curr, this.val),
-        startWith(this.val),
         takeWhile((val: number) => val >= 0),
-        repeat()
+        finalize(() => { console.log("FINALIZE");  this.val = 5}),
+        repeat(),
+        startWith(5)
       )
       .subscribe(
         (left: number) => {
