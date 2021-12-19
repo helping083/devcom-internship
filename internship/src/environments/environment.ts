@@ -4,7 +4,7 @@
 
 export const environment = {
   production: false,
-  cocktailApiUrl: "https://the-cocktail-db.p.rapidapi.com"
+  cocktailApiUrl: "https://spoonacular-recipe-food-nutrition-v1.p.rapidapi.com"
 };
 
 /*

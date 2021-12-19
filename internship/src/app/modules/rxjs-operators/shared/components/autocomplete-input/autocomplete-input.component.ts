@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { FormControl } from '@angular/forms';
 
 @Component({
@@ -7,13 +7,16 @@ import { FormControl } from '@angular/forms';
   styleUrls: ['./autocomplete-input.component.scss']
 })
 export class AutocompleteInputComponent implements OnInit {
+  @Input() autocompleteData: any[] = [];
   @Input() control!: FormControl;
+
+  @Output() search: EventEmitter<string> = new EventEmitter<string>();
 
   constructor() { }
 
   ngOnInit(): void {
     this.control.valueChanges.subscribe((val: string) => {
-      console.log('val', val)
+      this.search.emit(val)
     })
   }
 

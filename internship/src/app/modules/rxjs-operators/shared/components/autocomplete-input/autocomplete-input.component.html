@@ -1,2 +1,11 @@
-<input type="text" placeholder="test" [formControl]="control"/>
-<app-option>test</app-option>
+<input class="input is-medium" placeholder="Search..." [formControl]="control" [appAutocomplete]="autocomplete">
+
+<app-autocomplete #autocomplete="appAutocompleteComponent">
+  <ng-template appAutocompleteContent>
+    <ng-container *ngIf="autocompleteData.length > 0">
+      <app-option *ngFor="let option of autocompleteData">
+        <span>{{option.title}}</span>
+      </app-option>
+    </ng-container>
+  </ng-template>
+</app-autocomplete>

@@ -1,4 +1,4 @@
-import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
+import { ChangeDetectorRef, Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { FormControl } from '@angular/forms';
 import { interval, Observable, timer } from 'rxjs';
 import { switchMap } from 'rxjs/operators';
@@ -15,11 +15,12 @@ import { CocktailService } from './shared/services/CocktailService.service';
   styleUrls: ['./rxjs-operators.component.scss']
 })
 export class RxjsOperatorsComponent implements OnInit {
+  public ingredients: Array<any> = []
   public inputSearch: FormControl = new FormControl('');
 
   @ViewChild('view', { static: true, read: ElementRef }) private readonly view!: ElementRef;
 
-  constructor(private readonly _cocktailService: CocktailService) { }
+  constructor(private readonly _cocktailService: CocktailService, private _cdr: ChangeDetectorRef) { }
 
   ngOnInit(): void {
     const test$: Observable<number> = interval(500).pipe(evenFilter(), viewUpdater(this.view.nativeElement), logger);
@@ -27,13 +28,17 @@ export class RxjsOperatorsComponent implements OnInit {
     this.inputSearch.valueChanges
       .pipe(
         inputHelper,
-        switchMap((searchParam: string): Observable<ICocktail[]> => {
+        switchMap((searchParam: string): Observable<any> => {
           return this._cocktailService.searchCoktail(searchParam);
         })
       )
-      .subscribe((val: ICocktail[]) => {
-        console.log(val)
+      .subscribe((val: any) => {
+        this.ingredients = val;
+        this._cdr.detectChanges()
     })
   }
 
+  public handleSearch(event: string): void {
+    console.log('search', event)
+  }
 }

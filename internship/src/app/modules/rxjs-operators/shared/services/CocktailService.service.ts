@@ -4,6 +4,7 @@ import { Observable } from 'rxjs';
 import { cocktailApiConfig } from 'src/app/core/configs/football-api';
 import { ICocktail } from 'src/app/core/data/models';
 import { environment } from 'src/environments/environment';
+
 @Injectable()
 export class CocktailService {
   private readonly _headers = cocktailApiConfig;
@@ -11,9 +12,9 @@ export class CocktailService {
 
   constructor(private readonly _http: HttpClient) { }
 
-  public searchCoktail(searchData: string): Observable<ICocktail[]> {
-    const params = new HttpParams().append('i', searchData);
+  public searchCoktail(searchData: string): Observable<any> {
+    const params = new HttpParams().append('query', searchData).append('number', 10);
 
-    return this._http.get<ICocktail[]>(`${this._coktailApiUrl}/filter.php`, { params, headers: this._headers });
+    return this._http.get<any>(`${this._coktailApiUrl}/recipes/autocomplete`, { params, headers: this._headers });
   };
 };

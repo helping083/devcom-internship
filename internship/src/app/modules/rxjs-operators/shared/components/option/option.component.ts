@@ -9,18 +9,15 @@ import { mapTo } from 'rxjs/operators';
 })
 export class OptionComponent implements OnInit {
   get element() { return this.host.nativeElement; } 
-  
 
   @Input() value!: string;
+
   click$!: Observable<string>;
 
-  constructor(private host: ElementRef) { 
-    
-  }
+  constructor(private host: ElementRef){}
 
   ngOnInit(): void {
     this.click$ = fromEvent(this.element, 'click').pipe(mapTo(this.value));
-    console.log(this.host)
   }
 
 }
