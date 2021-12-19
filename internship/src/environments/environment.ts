@@ -3,7 +3,8 @@
 // The list of file replacements can be found in `angular.json`.
 
 export const environment = {
-  production: false
+  production: false,
+  cocktailApiUrl: "https://the-cocktail-db.p.rapidapi.com"
 };
 
 /*
