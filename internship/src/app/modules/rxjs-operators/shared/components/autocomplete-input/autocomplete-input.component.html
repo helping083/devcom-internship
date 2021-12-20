@@ -3,7 +3,7 @@
 <app-autocomplete #autocomplete="appAutocompleteComponent">
   <ng-template appAutocompleteContent>
     <ng-container *ngIf="autocompleteData.length > 0">
-      <app-option *ngFor="let option of autocompleteData">
+      <app-option *ngFor="let option of autocompleteData" [value]="option.id" (chooseOption)="handleOptionClick($event)">
         <span>{{option.title}}</span>
       </app-option>
     </ng-container>

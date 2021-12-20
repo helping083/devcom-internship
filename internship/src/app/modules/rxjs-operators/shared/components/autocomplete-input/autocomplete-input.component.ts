@@ -14,10 +14,9 @@ export class AutocompleteInputComponent implements OnInit {
 
   constructor() { }
 
-  ngOnInit(): void {
-    this.control.valueChanges.subscribe((val: string) => {
-      this.search.emit(val)
-    })
-  }
+  ngOnInit(): void { }
 
+  public handleOptionClick(recipeId: string): void {
+    this.search.emit(recipeId);
+  }
 }

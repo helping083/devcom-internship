@@ -1,0 +1,10 @@
+.option {
+  background-color: #fafafa;
+  padding: 10px 0px;
+  cursor: pointer;
+  transition: background-color .4s linear;
+  &:hover {
+    background-color: #cccccc;
+    transition: background-color .4s linear;
+  }
+}

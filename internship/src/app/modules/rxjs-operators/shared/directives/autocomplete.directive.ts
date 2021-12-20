@@ -10,6 +10,15 @@ import { AutocompleteComponent } from '../components/autocomplete/autocomplete.c
   selector: '[appAutocomplete]'
 })
 export class AutocompleteDirective implements OnInit, OnDestroy {
+
+  private get origin(): HTMLElement {
+    return this._host.nativeElement;
+  }
+
+  public get control(): AbstractControl {
+    return this._ngControl.control as AbstractControl;
+  }
+
   @Input() public appAutocomplete!: AutocompleteComponent;
 
   private _overlayRef!: OverlayRef;
@@ -29,10 +38,6 @@ export class AutocompleteDirective implements OnInit, OnDestroy {
     }
   }
 
-  public get control(): AbstractControl {
-    return this._ngControl.control as AbstractControl;
-  }
-
   public ngOnInit(): void {
     this._handleInputKeydownEvent();
     this._handleInputValueChange();
@@ -43,7 +48,7 @@ export class AutocompleteDirective implements OnInit, OnDestroy {
   }
 
   private _handleInputKeydownEvent(): void {
-    fromEvent(this.origin, 'keydown')
+    fromEvent<KeyboardEvent>(this.origin, 'keydown')
       .pipe(
         takeUntil(this._destroyed$),
         filter(() => !this._overlayRef)
@@ -88,7 +93,7 @@ export class AutocompleteDirective implements OnInit, OnDestroy {
 
   private _getOverlayPosition(): FlexibleConnectedPositionStrategy {
     const positions = [
-      new ConnectionPositionPair({ originX: 'start', originY: 'bottom' }, { overlayX: 'start', overlayY: 'top' }),
+      new ConnectionPositionPair({ originX: 'end', originY: 'bottom' }, { overlayX: 'start', overlayY: 'top' }),
       new ConnectionPositionPair({ originX: 'start', originY: 'top' }, { overlayX: 'start', overlayY: 'bottom' })
     ];
 
@@ -98,10 +103,6 @@ export class AutocompleteDirective implements OnInit, OnDestroy {
       .withPositions(positions)
       .withFlexibleDimensions(false)
       .withPush(false);
-  }
-
-  private get origin(): HTMLElement {
-    return this._host.nativeElement;
   }
 }
 

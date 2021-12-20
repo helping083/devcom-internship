@@ -6,6 +6,7 @@ import { OptionComponent } from '../option/option.component';
 
 @Component({
   selector: 'app-autocomplete',
+  styleUrls: ['./autocomplete.component.scss'],
   template: `
     <ng-template #root>
       <div class="autocomplete">
