@@ -7,7 +7,7 @@ import { environment } from 'src/environments/environment';
 
 @Injectable()
 export class RecipelService {
-  private readonly _headers = recipeApiConfig;
+  private readonly _headers: { [key:string]: string } = recipeApiConfig;
   private readonly _recipeApiUrl: string = environment.recipeApiUrl;
 
   constructor(private readonly _http: HttpClient) { }
@@ -20,5 +20,5 @@ export class RecipelService {
 
   public getRecipe(recipeId: string): Observable<IRecipe> {
     return this._http.get<IRecipe>(`${this._recipeApiUrl}/recipes/${recipeId}/information`, { headers: this._headers });
-  }
+  };
 };

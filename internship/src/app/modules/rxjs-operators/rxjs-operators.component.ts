@@ -24,15 +24,16 @@ export class RxjsOperatorsComponent implements OnInit {
 
   constructor(private readonly _recipelService: RecipelService, private _cdr: ChangeDetectorRef) { }
 
-  ngOnInit(): void {
+  public ngOnInit(): void {
     const test$: Observable<number> = interval(500).pipe(evenFilter(), viewUpdater(this.view.nativeElement), logger);
 
     this.inputSearch.valueChanges
       .pipe(
         inputHelper,
         logger,
-        tap((val: any) => {
-          this.selectedIngredient = undefined as unknown as IRecipe
+        tap((searchVal: string): void => {
+          this.selectedIngredient = undefined as unknown as IRecipe;
+          this._cdr.detectChanges();
         }),
         switchMap((searchParam: string): Observable<IRecipeSearch[]> => {
           return this._recipelService.searchCoktail(searchParam);
@@ -41,8 +42,8 @@ export class RxjsOperatorsComponent implements OnInit {
       .subscribe((val: IRecipeSearch[]) => {
         this.ingredients = val;
         this._cdr.detectChanges()
-    })
-  }
+      });
+  };
 
   public handleSearch(event: string): void {
     this._recipelService.getRecipe(event)
@@ -53,5 +54,5 @@ export class RxjsOperatorsComponent implements OnInit {
         this.selectedIngredient = val;
         this._cdr.detectChanges();
       });
-  }
+  };
 }

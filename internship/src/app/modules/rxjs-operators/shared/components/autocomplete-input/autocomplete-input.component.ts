@@ -1,22 +1,24 @@
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { ChangeDetectionStrategy, Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { FormControl } from '@angular/forms';
+import { IRecipeSearch } from 'src/app/core/data/models';
 
 @Component({
   selector: 'app-autocomplete-input',
   templateUrl: './autocomplete-input.component.html',
-  styleUrls: ['./autocomplete-input.component.scss']
+  styleUrls: ['./autocomplete-input.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class AutocompleteInputComponent implements OnInit {
-  @Input() autocompleteData: any[] = [];
-  @Input() control!: FormControl;
+  @Input() public autocompleteData: IRecipeSearch[] = [];
+  @Input() public control!: FormControl;
 
-  @Output() search: EventEmitter<string> = new EventEmitter<string>();
+  @Output() public readonly search: EventEmitter<string> = new EventEmitter<string>();
 
   constructor() { }
 
-  ngOnInit(): void { }
+  public ngOnInit(): void { }
 
   public handleOptionClick(recipeId: string): void {
     this.search.emit(recipeId);
-  }
+  };
 }

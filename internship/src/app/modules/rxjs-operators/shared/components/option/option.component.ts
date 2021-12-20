@@ -1,24 +1,27 @@
-import { Component, ElementRef, EventEmitter, Input, OnInit, Output } from '@angular/core';
-import { Observable, fromEvent } from 'rxjs';
+import { ChangeDetectionStrategy, Component, ElementRef, EventEmitter, Input, OnDestroy, OnInit, Output } from '@angular/core';
+import { Observable, fromEvent, ReplaySubject } from 'rxjs';
 import { map, mapTo, tap } from 'rxjs/operators';
 
 @Component({
   selector: 'app-option',
   templateUrl: './option.component.html',
-  styleUrls: ['./option.component.scss']
+  styleUrls: ['./option.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class OptionComponent implements OnInit {
-  get element() { return this.host.nativeElement; } 
+export class OptionComponent implements OnInit, OnDestroy {
+  get element() { return this._host.nativeElement; };
 
-  @Input() value!: number;
-  @Output() chooseOption: EventEmitter<string> = new EventEmitter<string>();
+  @Input() public value!: number;
+  @Output() public readonly chooseOption: EventEmitter<string> = new EventEmitter<string>();
 
   public click$!: Observable<string>;
 
-  constructor(private host: ElementRef){}
+  private readonly _destroy$: ReplaySubject<void> = new ReplaySubject<void>(1);
 
-  ngOnInit(): void {
-    this.click$ = fromEvent(this.element, 'click')
+  constructor(private readonly _host: ElementRef){}
+
+  public ngOnInit(): void {
+    this.click$ = fromEvent<MouseEvent>(this.element, 'click')
       .pipe(
         mapTo(this.value),
         map((val: number) => val.toString(10)),
@@ -28,6 +31,10 @@ export class OptionComponent implements OnInit {
           }
         )
       );
-  }
+  };
 
+  public ngOnDestroy(): void {
+    this._destroy$.next();
+    this._destroy$.complete();
+  };
 }

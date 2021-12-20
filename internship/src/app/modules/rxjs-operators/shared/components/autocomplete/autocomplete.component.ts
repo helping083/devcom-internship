@@ -1,5 +1,5 @@
-import { Component, ContentChild, ContentChildren, OnInit, QueryList, TemplateRef, ViewChild } from '@angular/core';
-import { merge } from 'rxjs';
+import { ChangeDetectionStrategy, Component, ContentChild, ContentChildren, OnInit, QueryList, TemplateRef, ViewChild } from '@angular/core';
+import { merge, Observable } from 'rxjs';
 import { switchMap } from 'rxjs/operators';
 import { AutocompleteContentDirective } from '../../directives/autocomplete-content.directive';
 import { OptionComponent } from '../option/option.component';
@@ -14,21 +14,22 @@ import { OptionComponent } from '../option/option.component';
       </div>
     </ng-template>
   `,
-  exportAs: 'appAutocompleteComponent'
+  exportAs: 'appAutocompleteComponent',
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class AutocompleteComponent {
-  @ViewChild('root') rootTemplate!: TemplateRef<any>;
+  @ViewChild('root') public rootTemplate!: TemplateRef<any>;
 
-  @ContentChild(AutocompleteContentDirective) content!: AutocompleteContentDirective;
+  @ContentChild(AutocompleteContentDirective) public content!: AutocompleteContentDirective;
 
-  @ContentChildren(OptionComponent) options!: QueryList<OptionComponent>;
+  @ContentChildren(OptionComponent) public options!: QueryList<OptionComponent>;
 
-  optionsClick() {
+  public optionsClick(): Observable<any> {
     return this.options.changes.pipe(
       switchMap(options => {
         const clicks$ = options.map((option: OptionComponent) => option.click$);
         return merge(...clicks$);
       })
     );
-  }
+  };
 }

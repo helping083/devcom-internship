@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, ChangeDetectorRef, Directive, ElementRef, HostListener, Input, OnDestroy, OnInit, Renderer2, ViewContainerRef } from '@angular/core';
+import { Directive, ElementRef, HostListener, Input, OnDestroy, OnInit, ViewContainerRef } from '@angular/core';
 import { fromEvent, Observable, ReplaySubject } from 'rxjs';
 import { ConnectionPositionPair, FlexibleConnectedPositionStrategy, Overlay, OverlayRef } from '@angular/cdk/overlay';
 import { TemplatePortal } from '@angular/cdk/portal';
@@ -9,15 +9,15 @@ import { AutocompleteComponent } from '../components/autocomplete/autocomplete.c
 @Directive({
   selector: '[appAutocomplete]'
 })
-export class AutocompleteDirective implements OnInit, OnDestroy {
+export class AutocompleteDirective implements OnInit {
 
   private get origin(): HTMLElement {
     return this._host.nativeElement;
-  }
+  };
 
   public get control(): AbstractControl {
     return this._ngControl.control as AbstractControl;
-  }
+  };
 
   @Input() public appAutocomplete!: AutocompleteComponent;
 
@@ -41,10 +41,6 @@ export class AutocompleteDirective implements OnInit, OnDestroy {
   public ngOnInit(): void {
     this._handleInputKeydownEvent();
     this._handleInputValueChange();
-  }
-
-  public ngOnDestroy(): void {
-
   }
 
   private _handleInputKeydownEvent(): void {
@@ -81,7 +77,7 @@ export class AutocompleteDirective implements OnInit, OnDestroy {
       positionStrategy: this._getOverlayPosition()
     });
 
-    const template = new TemplatePortal(this.appAutocomplete.rootTemplate, this._vcr);
+    const template: TemplatePortal = new TemplatePortal(this.appAutocomplete.rootTemplate, this._vcr);
     this._overlayRef.attach(template);
     overlayClickOutside(this._overlayRef, this.origin).subscribe(() => this._close());
   }
@@ -92,7 +88,7 @@ export class AutocompleteDirective implements OnInit, OnDestroy {
   }
 
   private _getOverlayPosition(): FlexibleConnectedPositionStrategy {
-    const positions = [
+    const positions: Array<ConnectionPositionPair> = [
       new ConnectionPositionPair({ originX: 'end', originY: 'bottom' }, { overlayX: 'start', overlayY: 'top' }),
       new ConnectionPositionPair({ originX: 'start', originY: 'top' }, { overlayX: 'start', overlayY: 'bottom' })
     ];
@@ -109,9 +105,9 @@ export class AutocompleteDirective implements OnInit, OnDestroy {
 export const overlayClickOutside = (overlayRef: OverlayRef, origin: HTMLElement): Observable<MouseEvent> =>
   fromEvent<MouseEvent>(document, 'click').pipe(
     filter(event => {
-      const clickTarget = event.target as HTMLElement;
-      const notOrigin = clickTarget !== origin; // the input
-      const notOverlay = !!overlayRef && overlayRef.overlayElement.contains(clickTarget) === false; // the autocomplete
+      const clickTarget: HTMLElement = event.target as HTMLElement;
+      const notOrigin: boolean = clickTarget !== origin; // the input
+      const notOverlay: boolean = !!overlayRef && overlayRef.overlayElement.contains(clickTarget) === false; // the autocomplete
 
       return notOrigin && notOverlay;
     }),
