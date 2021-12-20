@@ -1,0 +1,25 @@
+<div class="ingredients">
+  <h3 class="ingredients__title">{{ingredients.title}}</h3>
+  <div class="ingredients__short-info">
+    <div class="ingredients__image">
+      <img [src]="ingredients.image"/>
+    </div>
+    <div class="ingredients__info">
+      <ul>
+        <li>Cooking time: {{ingredients.readyInMinutes}} min</li>
+        <li>Up to: {{ingredients.servings}} person</li>
+      </ul>
+    </div>
+  </div>
+  <div class="ingredients__instructions-container">
+    <h4>Instruction for cooking</h4>
+    <div [innerHTML]="ingredients.instructions" class="ingredients__instructions-content"></div>
+  </div>
+  <div class="ingredients__suitable">
+    <b>Suitable for: </b> <span *ngFor="let dish of ingredients.dishTypes" class="ingredients__dishTypes">{{dish}}</span>
+  </div>
+  <div [innerHTML]="ingredients.summary" class="ingredients__summary"></div>
+  <div>
+    <a target="_blank" [href]="ingredients.sourceUrl" class="ingredients__read-more">read more</a>
+  </div>
+</div>

@@ -1,12 +1,13 @@
 import { ChangeDetectorRef, Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { FormControl } from '@angular/forms';
-import { BehaviorSubject, interval, Observable, timer } from 'rxjs';
-import { switchMap, take } from 'rxjs/operators';
+import { BehaviorSubject, interval, Observable } from 'rxjs';
+import { switchMap, take, tap } from 'rxjs/operators';
+import { IRecipe, IRecipeSearch } from 'src/app/core/data/models';
 import { evenFilter } from './operators/evenFilter';
 import { inputHelper } from './operators/inputHelper';
 import { logger } from './operators/logger';
 import { viewUpdater } from './operators/viewUpdater';
-import { CocktailService } from './shared/services/CocktailService.service';
+import { RecipelService } from './shared/services/recipeService.service';
 
 @Component({
   selector: 'app-rxjs-operators',
@@ -15,13 +16,13 @@ import { CocktailService } from './shared/services/CocktailService.service';
 })
 export class RxjsOperatorsComponent implements OnInit {
   public ingredientLoading$: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
-  public ingredients: Array<any> = [];
-  public selectedIngredient: any;
+  public ingredients: Array<IRecipeSearch> = [];
+  public selectedIngredient!: IRecipe;
   public inputSearch: FormControl = new FormControl('');
 
   @ViewChild('view', { static: true, read: ElementRef }) private readonly view!: ElementRef;
 
-  constructor(private readonly _cocktailService: CocktailService, private _cdr: ChangeDetectorRef) { }
+  constructor(private readonly _recipelService: RecipelService, private _cdr: ChangeDetectorRef) { }
 
   ngOnInit(): void {
     const test$: Observable<number> = interval(500).pipe(evenFilter(), viewUpdater(this.view.nativeElement), logger);
@@ -30,21 +31,23 @@ export class RxjsOperatorsComponent implements OnInit {
       .pipe(
         inputHelper,
         logger,
-        switchMap((searchParam: string): Observable<any> => {
-          return this._cocktailService.searchCoktail(searchParam);
+        tap((val: any) => {
+          this.selectedIngredient = undefined as unknown as IRecipe
+        }),
+        switchMap((searchParam: string): Observable<IRecipeSearch[]> => {
+          return this._recipelService.searchCoktail(searchParam);
         })
       )
-      .subscribe((val: any) => {
+      .subscribe((val: IRecipeSearch[]) => {
         this.ingredients = val;
         this._cdr.detectChanges()
     })
   }
 
   public handleSearch(event: string): void {
-    this._cocktailService.getRecipe(event)
+    this._recipelService.getRecipe(event)
       .pipe(
-        take(1),
-        logger
+        take(1)
       )
       .subscribe((val: any) => {
         this.selectedIngredient = val;

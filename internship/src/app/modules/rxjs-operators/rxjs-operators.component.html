@@ -1,6 +1,9 @@
 <div class="rxjs-operators">
-  <p #view>rxjs-operators works!</p>
+  <p #view></p>
   <app-autocomplete-input [control]="inputSearch" (search)="handleSearch($event)" [autocompleteData]="ingredients"></app-autocomplete-input>
+  <ng-container *ngIf="selectedIngredient">
+    <app-ingredient-details [ingredientDetails]="selectedIngredient"></app-ingredient-details>
+  </ng-container>
 </div>
 
 <ng-template #loading>

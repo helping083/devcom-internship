@@ -3,13 +3,14 @@ import { CommonModule } from '@angular/common';
 import { RxjsOperatorsComponent } from './rxjs-operators.component';
 import { RxjsOperatorsRoutingModule } from './rxjs-operators.routing.module';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { CocktailService } from './shared/services/CocktailService.service';
+import { RecipelService } from './shared/services/recipeService.service';
 import { AutocompleteInputComponent } from './shared/components/autocomplete-input/autocomplete-input.component';
 import { OptionComponent } from './shared/components/option/option.component';
 import { AutocompleteComponent } from './shared/components/autocomplete/autocomplete.component';
 import { AutocompleteContentDirective } from './shared/directives/autocomplete-content.directive';
 import { OverlayModule } from '@angular/cdk/overlay';
 import { AutocompleteDirective } from './shared/directives/autocomplete.directive';
+import { IngredientDetailsComponent } from './shared/components/ingredient-details/ingredient-details.component';
 
 
 @NgModule({
@@ -19,7 +20,8 @@ import { AutocompleteDirective } from './shared/directives/autocomplete.directiv
     OptionComponent,
     AutocompleteComponent,
     AutocompleteContentDirective,
-    AutocompleteDirective
+    AutocompleteDirective,
+    IngredientDetailsComponent
   ],
   imports: [
     CommonModule,
@@ -28,6 +30,6 @@ import { AutocompleteDirective } from './shared/directives/autocomplete.directiv
     RxjsOperatorsRoutingModule,
     OverlayModule
   ],
-  providers: [CocktailService]
+  providers: [RecipelService]
 })
 export class RxjsOperatorsModule { }

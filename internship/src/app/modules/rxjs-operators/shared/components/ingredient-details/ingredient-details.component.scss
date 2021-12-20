@@ -1,0 +1,65 @@
+.ingredients > * {
+  font-family: 'Open Sans', sans-serif;
+}
+
+.ingredients {
+  max-width: 768px;
+  padding-bottom: 30px;
+
+  &__short-info {
+    display: flex;
+  }
+
+  &__image {
+    flex: 0 0 300px;
+    width: 300px;
+    img {
+      width: 100%;
+      max-width: 100%;
+      height: auto;
+      object-fit: cover;
+    }
+  }
+
+  &__info {
+    flex-grow: 1;
+    padding: 20px;
+    li {
+      padding-bottom: 10px;
+    }
+  }
+
+  &__title {
+    text-align: center;
+    font-size: 28px;
+  }
+
+  &__dishTypes {
+    margin-right: 10px;
+  }
+ 
+  &__suitable {
+    margin-bottom: 20px;
+  }
+
+  &__instructions-container {
+    margin-bottom: 20px;
+  }
+
+  &__instructions-content {
+    font-size: 1.125rem;
+    line-height: 1.6875rem;
+  }
+
+  &__summary {
+    font-size: 1rem;
+    line-height: 1.6875rem;
+    margin-bottom: 20px;
+  }
+
+  &__read-more {
+    background-color: rgba(240, 240, 240, 1);
+    padding: 10px 20px;
+    color: rgb(100, 90, 140);
+  }
+}
