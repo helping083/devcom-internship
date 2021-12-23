@@ -7,7 +7,7 @@ import { IRecipe } from 'src/app/core/data/models';
   styleUrls: ['./ingredient-details.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class IngredientDetailsComponent  {
+export class IngredientDetailsComponent {
   get ingredients(): IRecipe {
     return this._details;
   };

@@ -1,15 +1,7 @@
 <div class="rxjs-operators">
-  <p #view></p>
+  <p #timer>0</p>
   <app-autocomplete-input [control]="inputSearch" (search)="handleSearch($event)" [autocompleteData]="ingredients"></app-autocomplete-input>
   <ng-container *ngIf="selectedIngredient">
     <app-ingredient-details [ingredientDetails]="selectedIngredient"></app-ingredient-details>
   </ng-container>
 </div>
-
-<ng-template #loading>
-  <ng-container *ngIf="ingredientLoading$ | async">
-    <ng-template>
-      <p>loading...</p>
-    </ng-template>
-  </ng-container>
-</ng-template>

@@ -1,6 +1,6 @@
 import { ChangeDetectionStrategy, Component, ElementRef, EventEmitter, Input, OnDestroy, OnInit, Output } from '@angular/core';
 import { Observable, fromEvent, ReplaySubject } from 'rxjs';
-import { map, mapTo, tap } from 'rxjs/operators';
+import { map, mapTo, takeUntil, tap } from 'rxjs/operators';
 
 @Component({
   selector: 'app-option',
@@ -12,6 +12,7 @@ export class OptionComponent implements OnInit, OnDestroy {
   get element() { return this._host.nativeElement; };
 
   @Input() public value!: number;
+
   @Output() public readonly chooseOption: EventEmitter<string> = new EventEmitter<string>();
 
   public click$!: Observable<string>;
@@ -25,6 +26,7 @@ export class OptionComponent implements OnInit, OnDestroy {
       .pipe(
         mapTo(this.value),
         map((val: number) => val.toString(10)),
+        takeUntil(this._destroy$),
         tap(
           (val: string) => { 
             this.chooseOption.emit(val);

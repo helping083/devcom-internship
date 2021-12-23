@@ -1,46 +1,45 @@
-import { ChangeDetectorRef, Component, ElementRef, OnInit, ViewChild } from '@angular/core';
+import { ChangeDetectionStrategy, ChangeDetectorRef, Component, ElementRef, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { FormControl } from '@angular/forms';
-import { BehaviorSubject, interval, Observable } from 'rxjs';
-import { switchMap, take, tap } from 'rxjs/operators';
+import { interval, Observable, ReplaySubject } from 'rxjs';
+import { switchMap, take, takeUntil, tap } from 'rxjs/operators';
 import { IRecipe, IRecipeSearch } from 'src/app/core/data/models';
-import { evenFilter } from './operators/evenFilter';
-import { inputHelper } from './operators/inputHelper';
-import { logger } from './operators/logger';
-import { viewUpdater } from './operators/viewUpdater';
+import { stopWatch } from './operators';
+import { inputHelper } from './operators/';
+import { viewUpdater } from './operators/';
 import { RecipelService } from './shared/services/recipeService.service';
 
 @Component({
   selector: 'app-rxjs-operators',
   templateUrl: './rxjs-operators.component.html',
-  styleUrls: ['./rxjs-operators.component.scss']
+  styleUrls: ['./rxjs-operators.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class RxjsOperatorsComponent implements OnInit {
-  public ingredientLoading$: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
+export class RxjsOperatorsComponent implements OnInit, OnDestroy {
   public ingredients: Array<IRecipeSearch> = [];
   public selectedIngredient!: IRecipe;
   public inputSearch: FormControl = new FormControl('');
 
-  @ViewChild('view', { static: true, read: ElementRef }) private readonly view!: ElementRef;
+  @ViewChild('timer', { static: true, read: ElementRef }) private readonly timer!: ElementRef;
+
+  private readonly _destroy$ = new ReplaySubject(1);
 
   constructor(private readonly _recipelService: RecipelService, private _cdr: ChangeDetectorRef) { }
 
   public ngOnInit(): void {
-    const test$: Observable<number> = interval(500).pipe(evenFilter(), viewUpdater(this.view.nativeElement), logger);
+    const timer$: Observable<number> = interval(1000).pipe(stopWatch(10, 2, 20), viewUpdater(this.timer.nativeElement));
+      timer$.subscribe()
 
     this.inputSearch.valueChanges
       .pipe(
-        inputHelper,
-        logger,
-        tap((searchVal: string): void => {
+        inputHelper(this._recipelService.searchRecipe),
+        tap((_: string): void => {
           this.selectedIngredient = undefined as unknown as IRecipe;
           this._cdr.detectChanges();
         }),
-        switchMap((searchParam: string): Observable<IRecipeSearch[]> => {
-          return this._recipelService.searchCoktail(searchParam);
-        })
+        takeUntil(this._destroy$)
       )
-      .subscribe((val: IRecipeSearch[]) => {
-        this.ingredients = val;
+      .subscribe((val: any) => {
+        this.ingredients = val as IRecipeSearch[];
         this._cdr.detectChanges()
       });
   };
@@ -50,9 +49,14 @@ export class RxjsOperatorsComponent implements OnInit {
       .pipe(
         take(1)
       )
-      .subscribe((val: any) => {
-        this.selectedIngredient = val;
+      .subscribe((recipe: IRecipe) => {
+        this.selectedIngredient = recipe;
         this._cdr.detectChanges();
       });
   };
+
+  public ngOnDestroy(): void { 
+    this._destroy$.next(null);
+    this._destroy$.complete();
+  }
 }

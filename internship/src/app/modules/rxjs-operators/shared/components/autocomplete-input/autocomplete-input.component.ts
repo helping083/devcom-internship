@@ -8,15 +8,13 @@ import { IRecipeSearch } from 'src/app/core/data/models';
   styleUrls: ['./autocomplete-input.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class AutocompleteInputComponent implements OnInit {
+export class AutocompleteInputComponent {
   @Input() public autocompleteData: IRecipeSearch[] = [];
   @Input() public control!: FormControl;
 
   @Output() public readonly search: EventEmitter<string> = new EventEmitter<string>();
 
   constructor() { }
-
-  public ngOnInit(): void { }
 
   public handleOptionClick(recipeId: string): void {
     this.search.emit(recipeId);
